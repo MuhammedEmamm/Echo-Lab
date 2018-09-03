@@ -6,6 +6,9 @@
     StockReportController.$inject = ['$scope', '$rootScope', '$state', '$http','BASE_URL', 'HTTP_HEADERS','$cookies'];
 
     function StockReportController($scope, $rootScope, $state, $http, AuthService, Session, BASE_URL, HTTP_HEADERS,$cookies) {
+		if($cookies.getObject('isloggedin')!== 'true'){
+				$state.go('Login') ; 
+			}
 		var today = new Date() ; 
 		var curmonth = today.getMonth() ; 
         $scope.role = $cookies.getObject('RoleName');
@@ -17,12 +20,13 @@
                 data: {
                     "Month": curmonth,
                     "RoleID": $cookies.getObject('RoleID'),
-                    "CompanyID": 10
+                    "CompanyID": 17
                 },
-                headers: {
+                     headers: {
                     "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
                 }
 			}).then(function(response){
 				//(response.data) ; 
@@ -39,12 +43,13 @@
                 method: 'POST',
                 url: BASE_URL + '/SalesRep/GetManagerList',
                 data: {
-                    "CompanyID": 10
+                    "CompanyID": 17
                 },
-                headers: {
+      headers: {
                     "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
                 }
 			}).then(function(response){
 				//(response.data) ; 

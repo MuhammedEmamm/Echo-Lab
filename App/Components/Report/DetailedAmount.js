@@ -6,6 +6,9 @@
     DetailedAmountController.$inject = ['$scope', '$rootScope', '$state', '$http','BASE_URL', 'HTTP_HEADERS','$cookies'];
 
     function DetailedAmountController($scope, $rootScope, $state, $http, BASE_URL, HTTP_HEADERS,$cookies) {
+		if($cookies.getObject('isloggedin')!== 'true'){
+				$state.go('Login') ; 
+			}
 		var today = new Date() ; 
 		var curmonth = today.getMonth() ; 
         var curyear = today.getFullYear() ; 
@@ -27,12 +30,13 @@
                     "Month": curmonth,
 					Year:curyear,
                     "RoleID": $cookies.getObject('RoleID'),
-                    "CompanyID": 10
+                    "CompanyID": 17
                 },
-                headers: {
+                      headers: {
                     "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
                 }
 			}).then(function(response){
 			//	//(response.data) ; 
@@ -65,12 +69,13 @@
                     "Month": x,
 					Year:y,
                     "RoleID": $cookies.getObject('RoleID'),
-                    "CompanyID": 10
+                    "CompanyID": 17
                 },
-                headers: {
+                     headers: {
                     "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
                 }
 			}).then(function(response){
 			//	//(response.data) ; 

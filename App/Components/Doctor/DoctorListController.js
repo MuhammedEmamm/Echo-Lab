@@ -6,6 +6,9 @@
     DoctorListController.$inject = ['$scope', '$rootScope', '$state', '$http','BASE_URL', 'HTTP_HEADERS','$cookies'];
 
     function DoctorListController($scope, $rootScope, $state, $http,BASE_URL, HTTP_HEADERS,$cookies) {
+		if($cookies.getObject('isloggedin')!== 'true'){
+				$state.go('Login') ; 
+			}
 
         $scope.role = $cookies.getObject('RoleName');
 		$scope.totalDisplayed = 20;
@@ -18,12 +21,13 @@
                 data: {
 					"UserID": $cookies.getObject('UserID'),
                     "RoleID": $cookies.getObject('RoleID'),
-                    "CompanyID": 10
+                    "CompanyID": 17
                 },
-                headers: {
+                 headers: {
                     "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
                 }
             }).then(function (res) {
                 //(res.data);
@@ -43,13 +47,14 @@
 			$http({
 				method:"POST",
 				url:BASE_URL + "/Visit/GetNotifications",
-				headers:{
-					"content-type": "Application/json",
+				      headers: {
+                    "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
-				},
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data:{
-					"CompanyID" : 10 
+					"CompanyID" : 17
 				}
 			}).then(function(response){
 					//($scope.List) ; 

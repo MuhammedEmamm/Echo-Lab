@@ -6,6 +6,9 @@
 	TeamListController.$inject = ['$scope', '$rootScope', '$state', '$http','BASE_URL', 'HTTP_HEADERS', '$cookies'];
 
 	function TeamListController($scope, $rootScope, $state, $http, BASE_URL, HTTP_HEADERS, $cookies) {
+		if($cookies.getObject('isloggedin')!== 'true'){
+				$state.go('Login') ; 
+			}
 		
 		//$('#mapDate').datepicker();
 		$('#mapDate').datepicker(); ; 
@@ -23,13 +26,14 @@
 				method: 'POST',
 				url: BASE_URL + '/SalesRep/GetTeam',
 				data: {
-					"CompanyID": 10
+					"CompanyID": 17
 				},
-				headers: {
-					"Content-Type": "Application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					"UserID": $cookies.getObject('UserID')
-				}
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                }
 			}).then(function (res) {
 				//(res.data);
 				$scope.team = res.data.Response;
@@ -56,13 +60,14 @@
 				url: BASE_URL + '/SalesRep/GetSalesRepList',
 				data: {
 					"UserID": x,
-					"CompanyID": 10
+					"CompanyID": 17
 				},
-				headers: {
-					"Content-Type": "Application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					"UserID": $cookies.getObject('UserID')
-				}
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                }
 			}).then(function (res) {
 				//(res.data);
 				$scope.team = res.data.Response;
@@ -76,13 +81,14 @@
 				method: 'POST',
 				url: BASE_URL + '/SalesRep/GetManagerList',
 				data: {
-					"CompanyID": 10
+					"CompanyID": 17
 				},
-				headers: {
-					"Content-Type": "Application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					"UserID": $cookies.getObject('UserID')
-				}
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                }
 			}).then(function (res) {
 				$scope.managerList = res.data.Response;
 				$scope.managerList.push({
@@ -101,13 +107,14 @@
 				method: 'POST',
 				url: BASE_URL + '/SalesRep/GetTeamManagers',
 				data: {
-					"CompanyID": 10
+					"CompanyID": 17
 				},
-				headers: {
-					"Content-Type": "Application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					"UserID": $cookies.getObject('UserID')
-				}
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                }
 			}).then(function (res) {
 				$scope.managers = res.data.Response;
 				document.getElementById('loading1').style.display = "none" ; 
@@ -142,13 +149,14 @@
 					"ManagerID": rep.ManagerID,
 					"SalesRepID": rep.SalesRepID,
 					"StatusCode": statusTo,
-					"CompanyID": 10
+					"CompanyID": 17
 				},
-				headers: {
-					"Content-Type": "Application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					"UserID": $cookies.getObject('UserID')
-				}
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                }
 			}).then(function (res) {
 				//(res.data);
 				getTeam();
@@ -178,13 +186,14 @@
 						"ManagerID": manager.ManagerID,
 						"AlternativeManagerID": alt,
 						"StatusCode": manager.Status,
-						"CompanyID": 10
+						"CompanyID": 17
 					},
-					headers: {
-						"Content-Type": "Application/json",
-						"Token": $cookies.getObject('SecurityToken'),
-						"UserID": $cookies.getObject('UserID')
-					}
+					      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                }
 
 				}).then(function (res) {
 					//(res.data);
@@ -216,15 +225,16 @@
 			$http({
 				method:"POST",
 				url:"http://yakensolution.cloudapp.net:80/IDHSales/api/Visit/MapLocaion",
-				headers:{
-					"Content-Type": "Application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					"UserID": $cookies.getObject('UserID')
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data:{
 					Day : $scope.mapDate,
 					SalesRepID:$scope.SalesRepID , 
-					CompanyID:10
+					CompanyID:17
 				}
 			}).then(function(response){
 				$scope.allmarkers = response.data.Response ; 
@@ -252,15 +262,16 @@
 			$http({
 				method:"POST",
 				url:"http://yakensolution.cloudapp.net:80/IDHSales/api/Visit/MapLocaion",
-				headers:{
-					"Content-Type": "Application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					"UserID": $cookies.getObject('UserID')
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data:{
 					Day : $scope.mapDate1,
 					SalesRepID:$scope.SalesRepID , 
-					CompanyID:10
+					CompanyID:17
 				}
 			}).then(function(response){
 				$scope.allmarkers = response.data.Response ; 

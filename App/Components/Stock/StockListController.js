@@ -6,6 +6,9 @@
     StockListController.$inject = ['$scope', '$rootScope', '$state', '$http','BASE_URL', 'HTTP_HEADERS','$cookies'];
 
     function StockListController($scope, $rootScope, $state, $http, BASE_URL, HTTP_HEADERS,$cookies) {
+		if($cookies.getObject('isloggedin')!== 'true'){
+				$state.go('Login') ; 
+			}
 
         $scope.role =$cookies.getObject('RoleName');
 
@@ -30,12 +33,13 @@
                     "Year": thisYear,
                     "Month": thisMonth,
                     "RoleID": $cookies.getObject('RoleID'),
-                    "CompanyID": 10
+                    "CompanyID": 17
                 },
-                headers: {
+                     headers: {
                     "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
                 }
             }).then(function (res) {
                 //(res.data);
@@ -48,13 +52,13 @@
                 method: 'POST',
                 url: BASE_URL + '/SalesRep/GetTeam',
                 data: {
-                    "CompanyID": 10
+                    "CompanyID": 17
                 },
-                headers: {
-            
+                    headers: {
                     "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
                 }
             }).then(function (res) {
                 $scope.reps = res.data.Response;
@@ -66,12 +70,13 @@
                 method: 'POST',
                 url: BASE_URL + '/SalesRep/GetManagerList',
                 data: {
-                    "CompanyID": 10
+                    "CompanyID": 17
                 },
-                headers: {
+                     headers: {
                     "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
                 }
             }).then(function (res) {
                 $scope.managers = res.data.Response;
@@ -83,12 +88,13 @@
                 method: 'POST',
                 url: BASE_URL + '/Stock/GetStockCategory',
                 data: {
-                    "CompanyID": 10
+                    "CompanyID": 17
                 },
-                headers: {
+                     headers: {
                     "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
                 }
             }).then(function (res) {
                 //(res.data);
@@ -102,12 +108,13 @@
                 url: BASE_URL + '/Stock/GetStockItems',
                 data: {
                     "CategoryID": categoryId,
-                    "CompanyID": 10
+                    "CompanyID": 17
                 },
-                headers: {
+      headers: {
                     "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
                 }
             }).then(function (res) {
                 //(res.data);
@@ -126,12 +133,13 @@
                     "ItemID": $scope.stock.Item.ID,
                     "ToUserID": $scope.stock.ToUserID,
                     "Qty": $scope.stock.Quantity,
-                    "CompanyID": 10
+                    "CompanyID": 17
                 },
-                headers: {
+                    headers: {
                     "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
                 }
             }).then(function (res) {
                 //(res.data);

@@ -6,6 +6,9 @@
     ReportListController.$inject = ['$scope', '$rootScope', '$state', '$http','BASE_URL', 'HTTP_HEADERS','$cookies'];
 
     function ReportListController($scope, $rootScope, $state, $http, BASE_URL, HTTP_HEADERS,$cookies) {
+		if($cookies.getObject('isloggedin')!== 'true'){
+				$state.go('Login') ; 
+			}
 
         $scope.role = $cookies.getObject('RoleName');
 
@@ -45,12 +48,13 @@
                     "Month": thisMonth,
                     "Year": thisYear,
                     "RoleID": $cookies.getObject('RoleID'),
-                    "CompanyID": 10
+                    "CompanyID": 17
                 },
-                headers: {
+                      headers: {
                     "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
                 }
             }).then(function (res) {
                 //(res.data);
@@ -77,12 +81,13 @@
                 data: {
                     "Month": thisMonth,
                     "Year": thisYear,
-                    "CompanyID": 10
+                    "CompanyID": 17
                 },
-                headers: {
+                     headers: {
                     "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
                 }
             }).then(function (res) {
                 //(res.data);
@@ -94,12 +99,13 @@
                 method: 'POST',
                 url: BASE_URL + '/Visit/GetCancelReason',
                 data: {
-                    "CompanyID": 10
+                    "CompanyID": 17
                 },
-                headers: {
+                      headers: {
                     "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
                 }
             }).then(function (res) {
                 //(res.data);
@@ -114,12 +120,13 @@
                     "StartDate": fromDate,
                     "EndDate": toDate,
                     "RoleID": $cookies.getObject('RoleID'),
-                    "CompanyID": 10
+                    "CompanyID": 17
                 },
-                headers: {
+                      headers: {
                     "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
                 }
             }).then(function (res) {
              //   console.log(res.data);
@@ -139,13 +146,14 @@
                     data: {
                         "VisitID": visitId,
                         "CancelReasonID": $scope.reason,
-                        "CompanyID": 10
+                        "CompanyID": 17
                     },
-                    headers: {
-                        "content-type": "Application/json",
-                        "Token": $cookies.getObject('SecurityToken'),
-                        "UserID": $cookies.getObject('UserID')
-                    }
+                         headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                }
                 }).then(function (res) {
                     if (res.data.IsSuccess) {
                         $('#myModal').modal('hide');

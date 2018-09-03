@@ -6,6 +6,9 @@
 	VisitPlanCtrl.$inject = ['$scope', '$rootScope', '$state', '$http', 'BASE_URL', '$cookies'];
 
 	function VisitPlanCtrl($scope, $rootScope, $state, $http, BASE_URL, $cookies) {
+			if($cookies.getObject('isloggedin')!== 'true'){
+				$state.go('Login') ; 
+			}
 		var today = new Date();
 		var mm = today.getMonth() + 1; //January is 0!
 		var yy = today.getFullYear();
@@ -43,16 +46,17 @@
 			$http({
 				method: "POST",
 				url: BASE_URL + "/Visit/GetPlanVisits",
-				headers: {
-					"Content-Type": "application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					"UserID": $cookies.getObject('UserID')
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data: {
 					"Month": $scope.nexmonth,
 					"Year": $scope.nextyear,
 					"SalesRepID": $cookies.getObject('UserID'),
-					"CompanyID": 10
+					"CompanyID": 17
 				}
 			}).then(function (response) {
 				//(response.data);
@@ -67,17 +71,18 @@
 			$http({
 				method: "POST",
 				url: BASE_URL + '/Visit/CreateVisitPlan',
-				headers: {
-					"Content-Type": "application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					"UserID": $cookies.getObject('UserID')
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data: {
 					UserName: $cookies.getObject('FullName'),
 					PlanName: $scope.curmonth,
 					Month: mm,
 					Year: yy,
-					CompanyID: 10
+					CompanyID: 17
 				}
 			}).then(function (response) {
 				if (response.data.IsSuccess) {
@@ -90,16 +95,17 @@
 			$http({
 				method: "POST",
 				url: BASE_URL + "/Visit/GetPlanVisits",
-				headers: {
-					"Content-Type": "application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					"UserID": $cookies.getObject('UserID')
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data: {
 					"Month": mm,
 					"Year": yy,
 					"SalesRepID": $cookies.getObject('UserID'),
-					"CompanyID": 10
+					"CompanyID": 17
 				}
 			}).then(function (response) {
 				//(response.data);
@@ -127,16 +133,17 @@
 			$http({
 				method: "POST",
 				url: BASE_URL + "/Visit/GetPlanVisits",
-				headers: {
-					"Content-Type": "application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					"UserID": $cookies.getObject('UserID')
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data: {
 					"Month": y,
 					"Year": z,
 					"SalesRepID": x,
-					"CompanyID": 10
+					"CompanyID": 17
 				}
 			}).then(function (response) {
 				//(response.data);
@@ -165,15 +172,16 @@
 			$http({
 				method: "POST",
 				url: BASE_URL + "/Doctor/GetDoctors",
-				headers: {
-					"Content-Type": "application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					UserID: $cookies.getObject('UserID'),
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data: {
 					"UserID": $cookies.getObject('UserID'),
 					"RoleID": $cookies.getObject('RoleID'),
-					"CompanyID": 10
+					"CompanyID": 17
 				}
 			}).then(function (response) {
 					//(response.data);
@@ -212,14 +220,15 @@
 			$http({
 				method: "POST",
 				url: BASE_URL + "/Doctor/GetDoctorOrgs",
-				headers: {
-					"Content-Type": "application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					UserID: $cookies.getObject('UserID'),
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data: {
 					DoctorID: x,
-					"CompanyID": 10
+					"CompanyID": 17
 				}
 			}).then(function (response) {
 					//(response.data);
@@ -237,11 +246,12 @@
 			$http({
 				method: "POST",
 				url: BASE_URL + "/Visit/CreateVisit",
-				headers: {
-					"Content-Type": "application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					UserID: $cookies.getObject('UserID'),
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data: {
 					"UserID": $cookies.getObject('UserID'),
 					"UserName": $cookies.getObject('FullName'),
@@ -252,7 +262,7 @@
 					"VisitDate": $scope.visitdate,
 					"Type": $scope.vistype,
 					"VisitLevel": $scope.vislevel,
-					"CompanyID": 10
+					"CompanyID": 17
 				}
 
 			}).then(function (response) {
@@ -275,11 +285,12 @@
 			$http({
 				method: "POST",
 				url: BASE_URL + "/Visit/CreateVisit",
-				headers: {
-					"Content-Type": "application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					UserID: $cookies.getObject('UserID'),
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data: {
 					"UserID": $cookies.getObject('UserID'),
 					"UserName": $cookies.getObject('FullName'),
@@ -290,7 +301,7 @@
 					"VisitDate": VD,
 					"Type": T,
 					"VisitLevel": VL,
-					"CompanyID": 10
+					"CompanyID": 17
 				}
 
 			}).then(function (response) {
@@ -367,15 +378,16 @@
 				$http({
 					method: "POST",
 					url: BASE_URL + "/Visit/ChangeVisitDate",
-					headers: {
-						"Content-Type": "Application/json",
-						"Token": $cookies.getObject('SecurityToken'),
-						"UserID": $cookies.getObject('UserID')
-					},
+					      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 					data: {
 						VisitID: $scope.visitid,
 						NewDate: x,
-						CompanyID: 10
+						CompanyID: 17
 					}
 				}).then(function (response) {
 					//(response.data);
@@ -390,13 +402,14 @@
 			$http({
 				method: "POST",
 				url: BASE_URL + "/Visit/SubmitVisitPlan",
-				headers: {
-					"Content-Type": "Application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					"UserID": $cookies.getObject('UserID')
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data: {
-					"CompanyID": 10
+					"CompanyID": 17
 				}
 			}).then(function (response) {
 				//(response.data);
@@ -416,13 +429,14 @@
 				method: 'POST',
 				url: BASE_URL + '/SalesRep/GetTeam',
 				data: {
-					"CompanyID": 10
+					"CompanyID": 17
 				},
-				headers: {
-					"Content-Type": "Application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					"UserID": $cookies.getObject('UserID')
-				}
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                }
 			}).then(function (res) {
 				//(res.data);
 				$scope.team = res.data.Response;
@@ -475,13 +489,14 @@
 			$http({
 				method : "POST" , 
 				url : BASE_URL + '/Visit/GetPlanDeadline',
-				headers :{
-					"content-type": "Application/json",
+				      headers: {
+                    "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
-				} , 
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                }, 
 				data : {
-				"CompanyID":10
+				"CompanyID":17
 				}
 			}).then(function(response){
 			   $scope.deadline = response.data.Response.DeadlineDay ; 
@@ -720,6 +735,9 @@
 	VisitPlanCreateCtrl.$inject = ['$scope', '$rootScope', '$state', '$http', 'BASE_URL', '$cookies'];
 
 	function VisitPlanCreateCtrl($scope, $rootScope, $state, $http, BASE_URL, $cookies) {
+			if($cookies.getObject('isloggedin')!== 'true'){
+				$state.go('Login') ; 
+			}
 		////("vis create");
 		$scope.previousmonths = [];
 		var today = new Date();
@@ -832,15 +850,16 @@
 			$http({
 				method: "POST",
 				url: BASE_URL + "/Doctor/GetDoctors",
-				headers: {
-					"Content-Type": "application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					UserID: $cookies.getObject('UserID'),
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data: {
 					"UserID": $cookies.getObject('UserID'),
 					"RoleID": $cookies.getObject('RoleID'),
-					"CompanyID": 10
+					"CompanyID": 17
 				}
 			}).then(function (response) {
 					//(response.data);
@@ -874,16 +893,17 @@
 			$http({
 				method: "POST",
 				url: BASE_URL + "/Visit/GetPlanVisits",
-				headers: {
-					"Content-Type": "application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					"UserID": $cookies.getObject('UserID')
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data: {
 					"Month": mm,
 					"Year": yy,
 					"SalesRepID": $cookies.getObject('UserID'),
-					"CompanyID": 10
+					"CompanyID": 17
 				}
 			}).then(function (response) {
 				//(response.data);
@@ -915,17 +935,18 @@
 				$http({
 					method: "POST",
 					url: BASE_URL + "/Visit/CreateVisitPlan",
-					headers: {
-						"Content-Type": "application/json",
-						"Token": $cookies.getObject('SecurityToken'),
-						"UserID": $cookies.getObject('UserID')
-					},
+					      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 					data: {
 						UserName: $cookies.getObject('FullName'),
 						PlanName: $scope.curmonth,
 						Month: mm,
 						Year: yy,
-						CompanyID: 10
+						CompanyID: 17
 					}
 				}).then(function (response) {
 					if (response.data.IsSuccess) {
@@ -936,17 +957,18 @@
 				$http({
 					method: "POST",
 					url: BASE_URL + "/Visit/CopyMonthVisitPlan",
-					headers: {
-						"content-type": "Application/json",
-						"Token": $cookies.getObject('SecurityToken'),
-						"UserID": $cookies.getObject('UserID')
-					},
+					      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 					data: {
 						"UserName": $cookies.getObject('FullName'),
 						"PlanName": $scope.curmonth,
 						"Month": mm,
 						"Year": yy,
-						"CompanyID": 10
+						"CompanyID": 17
 					}
 				}).then(function (response) {
 						//(response.data);
@@ -966,11 +988,12 @@
 			$http({
 				method: "POST",
 				url: BASE_URL + "/Visit/CreateVisit",
-				headers: {
-					"Content-Type": "application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					UserID: $cookies.getObject('UserID'),
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data: {
 					"UserID": $cookies.getObject('UserID'),
 					"UserName": $cookies.getObject('FullName'),
@@ -981,7 +1004,7 @@
 					"VisitDate": $scope.visitdate,
 					"Type": $scope.vistype,
 					"VisitLevel": $scope.vislevel,
-					"CompanyID": 10
+					"CompanyID": 17
 				}
 
 			}).then(function (response) {
@@ -1012,14 +1035,15 @@
 			$http({
 				method: "POST",
 				url: BASE_URL + "/Doctor/GetDoctorOrgs",
-				headers: {
-					"Content-Type": "application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					UserID: $cookies.getObject('UserID'),
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data: {
 					"DoctorID": x,
-					"CompanyID": 10
+					"CompanyID": 17
 				}
 			}).then(function (response) {
 					//(response.data);
@@ -1063,13 +1087,14 @@
 			$http({
 				method: "POST",
 				url: BASE_URL + "/Visit/SubmitVisitPlan",
-				headers: {
-					"Content-Type": "Application/json",
-					"Token": $cookies.getObject('SecurityToken'),
-					"UserID": $cookies.getObject('UserID')
-				},
+				      headers: {
+                    "content-type": "Application/json",
+                    "Token": $cookies.getObject('SecurityToken'),
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                },
 				data: {
-					"CompanyID": 10
+					"CompanyID": 17
 				}
 			}).then(function (response) {
 				//(response.data);
@@ -1087,13 +1112,14 @@
 			$http({
 				method : "POST" , 
 				url : BASE_URL + '/Visit/GetPlanDeadline',
-				headers :{
-					"content-type": "Application/json",
+				      headers: {
+                    "content-type": "Application/json",
                     "Token": $cookies.getObject('SecurityToken'),
-                    "UserID": $cookies.getObject('UserID')
-				} , 
+                    "UserID": $cookies.getObject('UserID') ,
+					'X-Frame-Options' : 'DENY'
+                }, 
 				data : {
-				"CompanyID":10
+				"CompanyID":17
 				}
 			}).then(function(response){
 			   $scope.deadline = response.data.Response.DeadlineDay ; 
